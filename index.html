@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Photoshop</title>
+        <meta charset="UTF-8">
+        <style>
+            #canvas {
+                max-width: 500px; /* Maximum width */
+                max-height: 500px; /* Maximum height */
+            }
+
+        </style> 
+    </head>
+    <body>
+        <h1>Photoshop</h1>
+        <input type="file" id="fileInput"><br><br>
+        <canvas id="canvas"></canvas>
+
+        <script>
+            // Get references to the input and canvas elements
+            const fileInput = document.getElementById('fileInput');
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+
+            // Add event listener to detect when a file is selected
+            fileInput.addEventListener('change', function(e) {
+                // Get the selected file
+                const file = e.target.files[0];
+
+                // Ensure the file is an image
+                if (file.type.startsWith('image/')) {
+                    // Create a new FileReader
+                    const reader = new FileReader();
+
+                    // Set up the FileReader to load the image
+                    reader.onload = function(event) {
+                        // Create a new image element
+                        const img = new Image();
+
+                        // Set the image source to the loaded data URL
+                        img.src = event.target.result;
+
+                        // Once the image is loaded, draw it onto the canvas
+                        img.onload = function() {
+                            canvas.width = img.width;
+                            canvas.height = img.height;
+                            ctx.drawImage(img, 0, 0);
+                        };
+                    };
+
+                    // Read the file as a data URL
+                    reader.readAsDataURL(file);
+                } else {
+                    alert('Please select an image file.');
+                }
+            });
+        </script>
+    </body>
+</html>
