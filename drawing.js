@@ -3,14 +3,12 @@ function drawOnImage(image = null) {
     
     const context = canvasElement.getContext("2d");
     
-    // if an image is present,
-    // the image passed as a parameter is drawn in the canvas
     if (image) {
       const imageWidth = image.width;
       const imageHeight = image.height;
-      // rescaling the canvas element
-      canvasElement.width = imageWidth;
-      canvasElement.height = imageHeight;
+
+      canvas.width = imageWidth;
+      canvas.height = imageHeight;
       context.drawImage(image, 0, 0, imageWidth, imageHeight);
     }
     

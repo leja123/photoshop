@@ -1,10 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&display=swap');
+
 * {
     background-color: black;
     color: white;
 }
 
+
 h1 {
+    font-family: 'Rubik Doodle Shadow', sans-serif; 
     text-align: center;
+}
+
+h2 {
+    font-family: 'Rubik Doodle Shadow', sans-serif; 
 }
 
 .container {
