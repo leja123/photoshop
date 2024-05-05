@@ -196,7 +196,7 @@ gaussianBlur.addEventListener('click', () => {
         [1, 2, 1],
         [2, 4, 2],
         [1, 2, 1]
-    ]; // 3x3 Gaussian kernel
+    ]; 
 
     for (let y = 1; y < canvas.height - 1; y++) {
         for (let x = 1; x < canvas.width - 1; x++) {
@@ -214,7 +214,7 @@ gaussianBlur.addEventListener('click', () => {
                     sumA += pixel.a * weight;
                 }
             }
-            const totalWeight = 16; // sum of all weights in the kernel
+            const totalWeight = 16; 
             data[(y * canvas.width + x) * 4] = sumR / totalWeight;
             data[(y * canvas.width + x) * 4 + 1] = sumG / totalWeight;
             data[(y * canvas.width + x) * 4 + 2] = sumB / totalWeight;
@@ -231,7 +231,6 @@ sobel.addEventListener('click', () => {
 
 	let original = new Uint8ClampedArray(data);
 
-    // Sobel operators for horizontal and vertical gradients
     const sobelX = [
         [-1, 0, 1],
         [-2, 0, 2],
@@ -249,30 +248,25 @@ sobel.addEventListener('click', () => {
             let gradientX = 0,
                 gradientY = 0;
 
-            // Compute horizontal gradient
             for (let dy = -1; dy <= 1; dy++) {
                 for (let dx = -1; dx <= 1; dx++) {
                     gradientX += sobelX[dy + 1][dx + 1] * getPixel(original, x + dx, y + dy, canvas.width).r;
                 }
             }
 
-            // Compute vertical gradient
             for (let dy = -1; dy <= 1; dy++) {
                 for (let dx = -1; dx <= 1; dx++) {
                     gradientY += sobelY[dy + 1][dx + 1] * getPixel(original, x + dx, y + dy, canvas.width).r;
                 }
             }
 
-            // Combine gradients to find magnitude
             let magnitude = Math.sqrt(gradientX * gradientX + gradientY * gradientY);
 
-            // Ensure magnitude is within 0-255 range
             magnitude = Math.min(255, Math.max(0, magnitude));
 
-            // Set pixel value to magnitude
-            data[(y * canvas.width + x) * 4] = magnitude; // Red channel
-            data[(y * canvas.width + x) * 4 + 1] = magnitude; // Green channel
-            data[(y * canvas.width + x) * 4 + 2] = magnitude; // Blue channel
+            data[(y * canvas.width + x) * 4] = magnitude; 
+            data[(y * canvas.width + x) * 4 + 1] = magnitude; 
+            data[(y * canvas.width + x) * 4 + 2] = magnitude; 
         }
     }
 	imgData.data = data;
@@ -285,7 +279,6 @@ laplac.addEventListener('click', () => {
 
 	let original = new Uint8ClampedArray(data);
 
-    // Laplacian kernel
     const laplacianKernel = [
         [0, 1, 0],
         [1, -4, 1],
@@ -296,20 +289,17 @@ laplac.addEventListener('click', () => {
         for (let x = 1; x < canvas.width - 1; x++) {
             let laplacian = 0;
 
-            // Compute Laplacian
             for (let dy = -1; dy <= 1; dy++) {
                 for (let dx = -1; dx <= 1; dx++) {
                     laplacian += laplacianKernel[dy + 1][dx + 1] * getPixel(original, x + dx, y + dy, canvas.width).r;
                 }
             }
 
-            // Ensure Laplacian value is within 0-255 range
             laplacian = Math.min(255, Math.max(0, laplacian));
 
-            // Set pixel value to Laplacian
-            data[(y * canvas.width + x) * 4] = laplacian; // Red channel
-            data[(y * canvas.width + x) * 4 + 1] = laplacian; // Green channel
-            data[(y * canvas.width + x) * 4 + 2] = laplacian; // Blue channel
+            data[(y * canvas.width + x) * 4] = laplacian; 
+            data[(y * canvas.width + x) * 4 + 1] = laplacian; 
+            data[(y * canvas.width + x) * 4 + 2] = laplacian; 
         }
     }
 	imgData.data = data;
@@ -322,7 +312,6 @@ sharpening.addEventListener('click', () => {
 
 	let original = new Uint8ClampedArray(data);
 
-    // Sharpening kernel
     const sharpeningKernel = [
         [0, -1, 0],
         [-1, 5, -1],
@@ -335,7 +324,6 @@ sharpening.addEventListener('click', () => {
                 sharpenedG = 0,
                 sharpenedB = 0;
 
-            // Apply sharpening kernel
             for (let dy = -1; dy <= 1; dy++) {
                 for (let dx = -1; dx <= 1; dx++) {
                     const pixel = getPixel(original, x + dx, y + dy, canvas.width);
@@ -346,15 +334,13 @@ sharpening.addEventListener('click', () => {
                 }
             }
 
-            // Ensure sharpened values are within 0-255 range
             sharpenedR = Math.min(255, Math.max(0, sharpenedR));
             sharpenedG = Math.min(255, Math.max(0, sharpenedG));
             sharpenedB = Math.min(255, Math.max(0, sharpenedB));
 
-            // Set pixel value to sharpened result
-            data[(y * canvas.width + x) * 4] = sharpenedR; // Red channel
-            data[(y * canvas.width + x) * 4 + 1] = sharpenedG; // Green channel
-            data[(y * canvas.width + x) * 4 + 2] = sharpenedB; // Blue channel
+            data[(y * canvas.width + x) * 4] = sharpenedR; 
+            data[(y * canvas.width + x) * 4 + 1] = sharpenedG; 
+            data[(y * canvas.width + x) * 4 + 2] = sharpenedB; 
         }
     }
 
@@ -363,47 +349,76 @@ sharpening.addEventListener('click', () => {
 })
 
 unsharpening.addEventListener('click', () => {
-	let imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    let imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     let data = imgData.data;
 
     let original = new Uint8ClampedArray(data);
 
-    // Unsharpening kernel
-    const unsharpeningKernel = [
-        [0, 1, 0],
-        [1, -5, 1],
-        [0, 1, 0]
-    ];
+    const amount = 0.5; 
 
-    for (let y = 1; y < canvas.height - 1; y++) {
-        for (let x = 1; x < canvas.width - 1; x++) {
-            let unsharpenedR = 0,
-                unsharpenedG = 0,
-                unsharpenedB = 0;
+    let blurred = applyGaussianBlur(original, canvas.width, canvas.height);
 
-            // Apply unsharpening kernel
-            for (let dy = -1; dy <= 1; dy++) {
-                for (let dx = -1; dx <= 1; dx++) {
-                    const pixel = getPixel(original, x + dx, y + dy, canvas.width);
-                    const weight = unsharpeningKernel[dy + 1][dx + 1];
-                    unsharpenedR += pixel.r * weight;
-                    unsharpenedG += pixel.g * weight;
-                    unsharpenedB += pixel.b * weight;
-                }
-            }
+    for (let i = 0; i < data.length; i += 4) {
+        let diffR = original[i] - blurred[i];
+        let diffG = original[i + 1] - blurred[i + 1];
+        let diffB = original[i + 2] - blurred[i + 2];
 
-            // Ensure unsharpened values are within 0-255 range
-            unsharpenedR = Math.min(255, Math.max(0, unsharpenedR));
-            unsharpenedG = Math.min(255, Math.max(0, unsharpenedG));
-            unsharpenedB = Math.min(255, Math.max(0, unsharpenedB));
+        
+        data[i] = original[i] + diffR * amount; 
+        data[i + 1] = original[i + 1] + diffG * amount; 
+        data[i + 2] = original[i + 2] + diffB * amount; 
+    }
 
-            // Set pixel value to unsharpened result
-            data[(y * canvas.width + x) * 4] = unsharpenedR; // Red channel
-            data[(y * canvas.width + x) * 4 + 1] = unsharpenedG; // Green channel
-            data[(y * canvas.width + x) * 4 + 2] = unsharpenedB; // Blue channel
+    ctx.putImageData(imgData, 0, 0);
+});
+
+function applyGaussianBlur(data, width, height) {
+    const radius = 2;
+    const sigma = 1;
+
+    const kernel = [];
+    let sum = 0;
+    for (let x = -radius; x <= radius; x++) {
+        for (let y = -radius; y <= radius; y++) {
+            const weight = Math.exp(-(x ** 2 + y ** 2) / (2 * sigma ** 2));
+            kernel.push(weight);
+            sum += weight;
         }
     }
 
-    imgData.data = data;
-    ctx.putImageData(imgData, 0, 0);
-}) 
+    for (let i = 0; i < kernel.length; i++) {
+        kernel[i] /= sum;
+    }
+
+    const blurred = new Uint8ClampedArray(data.length);
+
+    for (let y = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
+            let r = 0, g = 0, b = 0;
+            let k = 0;
+
+            for (let dy = -radius; dy <= radius; dy++) {
+                for (let dx = -radius; dx <= radius; dx++) {
+                    const currentX = x + dx;
+                    const currentY = y + dy;
+                    if (currentX >= 0 && currentX < width && currentY >= 0 && currentY < height) {
+                        const index = (currentY * width + currentX) * 4;
+                        const weight = kernel[k];
+                        r += data[index] * weight;
+                        g += data[index + 1] * weight;
+                        b += data[index + 2] * weight;
+                    }
+                    k++;
+                }
+            }
+
+            const index = (y * width + x) * 4;
+            blurred[index] = r;
+            blurred[index + 1] = g;
+            blurred[index + 2] = b;
+            blurred[index + 3] = data[index + 3]; 
+        }
+    }
+
+    return blurred;
+}
