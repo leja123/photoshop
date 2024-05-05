@@ -26,14 +26,14 @@ const updateHistogram = (histogramValues, ctx, canvas) => {
         histogramValues[b] = updatedHistogram[b];
     }
 
-    graf.data.datasets.forEach((dataset, index) => {
+    chart.data.datasets.forEach((dataset, index) => {
         dataset.data = histogramValues[index];
     });
 
-    graf.update();
+    chart.update();
 };
 
-const graf = new Chart("rdec", {
+const chart = new Chart("histogramChart", {
     type: "bar",
     data: {
         labels: ["0-50", "51-100", "101-150", "151-200", "201-255"],

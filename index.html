@@ -10,39 +10,45 @@
             }
 
         </style> 
+        <link rel="stylesheet" href="style.css">
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     </head>
     <body>
         <h1>Photoshop</h1>
-        <input type="file" id="fileInput"><br><br>
-        <canvas id="canvas"></canvas><br><br>
+        <div class="container">
+            <div id="left">
+                <input type="file" id="fileInput"><br><br>
+                <canvas id="canvas"></canvas><br><br>
+            </div>
+            <div id="right">
+                <h2>Basic:</h2>
+                Grayscale:
+                <button id="grayscale">Grayscale</button><br>
+                Treshold: 
+                <input type="range" min="0" max="255" value="128" id="treshold"><br>
+                Remove: 
+                <button id="removeRed">Red</button>
+                <button id="removeGreen">Green</button>
+                <button id="removeBlue">Blue</button><br><br>
+                Highlight color:<br>
+                Red: <input type="range" min="0" max="2" value="1" step="0.1" id="highlightRed"><br>
+                Green: <input type="range" min="0" max="2" value="1" step="0.1" id="highlightGreen"><br>
+                Blue: <input type="range" min="0" max="2" value="1" step="0.1" id="highlightBlue"><br><br>
+                Brightness:<input type="range" min="-10" max="10" value="0" id="brightness">
 
-        <h2>Tools:</h2>
-        Grayscale:
-        <button id="grayscale">Grayscale</button><br>
-        Treshold: 
-        <input type="range" min="0" max="255" value="128" id="treshold"><br>
-        Odstrani kanal: 
-        <button id="removeRed">Red</button>
-        <button id="removeGreen">Green</button>
-        <button id="removeBlue">Blue</button><br>
-        Highlight color:<br>
-        Red: <input type="range" min="0" max="2" value="1" step="0.1" id="highlightRed"><br>
-		Green: <input type="range" min="0" max="2" value="1" step="0.1" id="highlightGreen"><br>
-		Blue: <input type="range" min="0" max="2" value="1" step="0.1" id="highlightBlue"><br>
-        Brightness:
-        <input type="range" min="-10" max="10" value="0" id="brightness">
-
-        <h2>Advanced tools</h2>
-        <button id="boxBlur">Box blur</button><br>
-		<button id="gaussianBlur">Gaussian blur</button><br>
-		<button id="sobel">Sobel</button><br>
-		<button id="laplac">Laplac</button><br>
-		<button id="sharpening">Sharpening mask</button><br>
-		<button id="unsharpening">Unsharpening mask</button><br>
-
-        <h2>Histogram</h2>
-        <canvas id="rdec" style="width:100%"></canvas>
+                <h2>Advanced:</h2>
+                <button id="boxBlur">Box blur</button><br>
+                <button id="gaussianBlur">Gaussian blur</button><br>
+                <button id="sobel">Sobel</button><br>
+                <button id="laplac">Laplac</button><br>
+                <button id="sharpening">Sharpening mask</button><br>
+                <button id="unsharpening">Unsharpening mask</button><br>
+            </div>
+        </div>
+        <div id="chart">
+            <h2>Histogram:</h2>
+            <canvas id="histogramChart" style="width:100%"></canvas>
+        </div>
 
         <script src="upload.js"></script>
         <script src="filters.js"></script>
