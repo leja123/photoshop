@@ -17,6 +17,7 @@ fileInput.addEventListener('change', function(e) {
             canvas.width = img.width;
             canvas.height = img.height;
             ctx.drawImage(img, 0, 0);
+            updateHistogram(histogramValues, ctx, canvas);
             };
         };
 

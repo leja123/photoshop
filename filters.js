@@ -23,6 +23,7 @@ grayscale.addEventListener('click', () => {
 	}
     imgData.data = data;
 	ctx.putImageData(imgData, 0, 0);
+    updateHistogram(histogramValues, ctx, canvas);
 })
 
 
@@ -38,6 +39,7 @@ treshold.addEventListener('click', () => {
 
     imgData.data = data;
 	ctx.putImageData(imgData, 0, 0);
+    updateHistogram(histogramValues, ctx, canvas);
 })
 
 
@@ -54,6 +56,7 @@ removeRed.addEventListener('click', () => {
 
     imgData.data = data;
 	ctx.putImageData(imgData, 0, 0);
+    updateHistogram(histogramValues, ctx, canvas);
 })
 
 removeGreen.addEventListener('click', () => {
@@ -69,6 +72,7 @@ removeGreen.addEventListener('click', () => {
 
     imgData.data = data;
 	ctx.putImageData(imgData, 0, 0);
+    updateHistogram(histogramValues, ctx, canvas);
 })
 
 removeBlue.addEventListener('click', () => {
@@ -84,6 +88,7 @@ removeBlue.addEventListener('click', () => {
 
     imgData.data = data;
 	ctx.putImageData(imgData, 0, 0);
+    updateHistogram(histogramValues, ctx, canvas);
 })
 
 HighlightRed.addEventListener('click', () => {
@@ -99,6 +104,7 @@ HighlightRed.addEventListener('click', () => {
 
     imgData.data = data;
 	ctx.putImageData(imgData, 0, 0);
+    updateHistogram(histogramValues, ctx, canvas);
 })
 
 HighlightGreen.addEventListener('click', () => {
@@ -114,6 +120,7 @@ HighlightGreen.addEventListener('click', () => {
 
     imgData.data = data;
 	ctx.putImageData(imgData, 0, 0);
+    updateHistogram(histogramValues, ctx, canvas);
 })
 
 HighlightBlue.addEventListener('click', () => {
@@ -129,6 +136,7 @@ HighlightBlue.addEventListener('click', () => {
 
     imgData.data = data;
 	ctx.putImageData(imgData, 0, 0);
+    updateHistogram(histogramValues, ctx, canvas);
 })
 
 brightness.addEventListener('click', () => {
@@ -145,6 +153,7 @@ brightness.addEventListener('click', () => {
 	}
     imgData.data = data;
 	ctx.putImageData(imgData, 0, 0);
+    updateHistogram(histogramValues, ctx, canvas);
 })
 
 function getPixel(data, x, y, width) {
@@ -185,6 +194,7 @@ boxBlur.addEventListener('click', () => {
     }
 	imgData.data = data;
 	ctx.putImageData(imgData, 0, 0);
+    updateHistogram(histogramValues, ctx, canvas);
 })
 
 
@@ -223,6 +233,7 @@ gaussianBlur.addEventListener('click', () => {
     }
     imgData.data = data;
     ctx.putImageData(imgData, 0, 0);
+    updateHistogram(histogramValues, ctx, canvas);
 })
 
 sobel.addEventListener('click', () => {
@@ -271,6 +282,7 @@ sobel.addEventListener('click', () => {
     }
 	imgData.data = data;
     ctx.putImageData(imgData, 0, 0);
+    updateHistogram(histogramValues, ctx, canvas);
 })
 
 laplac.addEventListener('click', () => {
@@ -304,6 +316,7 @@ laplac.addEventListener('click', () => {
     }
 	imgData.data = data;
     ctx.putImageData(imgData, 0, 0);
+    updateHistogram(histogramValues, ctx, canvas);
 })
 
 sharpening.addEventListener('click', () => {
@@ -346,6 +359,7 @@ sharpening.addEventListener('click', () => {
 
 	imgData.data = data;
     ctx.putImageData(imgData, 0, 0);
+    updateHistogram(histogramValues, ctx, canvas);
 })
 
 unsharpening.addEventListener('click', () => {
@@ -370,6 +384,7 @@ unsharpening.addEventListener('click', () => {
     }
 
     ctx.putImageData(imgData, 0, 0);
+    updateHistogram(histogramValues, ctx, canvas);
 });
 
 function applyGaussianBlur(data, width, height) {
